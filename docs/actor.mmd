@@ -1,0 +1,12 @@
+flowchart TB
+  subgraph ACTOR["Actor"]
+    REF["Packed robot reference: 540 features"] --> ENC["Reference encoder<br/>540 → 2048 → 1024 → 512 → 512 → 64<br/>A frozen; B trained"]
+    ENC --> FSQ["Fixed FSQ<br/>2 tokens × 32 dimensions"]
+    OBS["10-step proprioceptive histories<br/>plus 9 current tracking signals: 789"] --> CAT["Concatenate: 64 + 789 = 853"]
+    FSQ --> CAT
+    CAT --> DEC["Control decoder<br/>853 → 2048 → 2048 → 1024 → 1024 → 512 → 512 → 23<br/>A and B trained"]
+    DEC --> MU["23 body-action means"]
+    MU --> DIST["Training: sample Gaussian actions<br/>Execution: use the means"]
+    STD["23 exploration-noise parameters<br/>A and B trained"] --> DIST
+  end
+  DIST --> OUT["Body-action postprocessing and PD"]

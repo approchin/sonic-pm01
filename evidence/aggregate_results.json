@@ -1,0 +1,455 @@
+{
+  "schema_version": 1,
+  "status": "draft_results_reviewed_with_scope_warnings",
+  "paper_exact_pipeline": false,
+  "review": {
+    "verdict": "WARN",
+    "review_independence": "same-family",
+    "acceptance_status": "provisional",
+    "scope": "CPU review of saved trajectories, inputs and reported metrics"
+  },
+  "training": {
+    "pretrained_source": "SONIC default G1 checkpoint",
+    "target": "PM01",
+    "method": "native dense actor adaptation, no LoRA",
+    "A": "decoder_only",
+    "B": "full_actor",
+    "critic": "trained in both arms",
+    "step4000_formal_target_training_gpu_hours_approx": {
+      "A": 6.513587914440366,
+      "B": 6.71245596382353
+    },
+    "gpu": "one RTX 4090 per arm",
+    "scope": "Includes parent-stage jobs once and target training occupancy including initialization/loading/saving; excludes source pretraining, evaluation, idle, conversion and unlisted experiments. Not exact GPU active-kernel time or total project cost.",
+    "step28000_formal_target_training_gpu_hours_approx": {
+      "A": 52.36822173489465,
+      "B": 53.934526756207156
+    }
+  },
+  "protocol": {
+    "environment": "PM01, Isaac Sim / Isaac Lab / PhysX",
+    "evaluation_gpu": "RTX 5060 Ti",
+    "seed": 42,
+    "fixed_start": true,
+    "rollouts_per_clip_per_model": 1,
+    "precision": "FP32 with TF32 permitted",
+    "physics_hz": 200,
+    "control_hz": 50,
+    "primary_failure": {
+      "root_z_error_gt_m": 0.25,
+      "any_13_tracked_link_z_error_gt_m": 0.3,
+      "root_SO3_angle_gt_rad": 0.8
+    },
+    "secondary_failure": {
+      "root_z_error_gt_m": 0.25,
+      "any_13_tracked_link_z_error_gt_m": 0.3,
+      "root_SO3_angle_squared_gt_rad2": 0.8
+    },
+    "physical_termination_envelope": "secondary; primary uses first observed primary crossing",
+    "success": "All reference frames observed through natural timeout without a threshold crossing or engineering failure.",
+    "denominators": "Fixed population size per model; no unobserved suffix or failed motion is fabricated."
+  },
+  "populations": {
+    "mixed500": {
+      "count": 500,
+      "sources": {
+        "LAFAN1": 106,
+        "OMOMO": 394
+      },
+      "difficulty": {
+        "basic": 150,
+        "moderate": 150,
+        "hard": 200
+      },
+      "lafan_synchronous_groups": 26,
+      "selection": "Previously qualified references; 272 source sequences overlap the prior OMOMO quality500; not a first blind test."
+    },
+    "bones500": {
+      "count": 500,
+      "candidate_count": 1209,
+      "selection_seed": 20261018,
+      "source": "BONES/SEED SOMA uniform",
+      "target_adaptation_recording_overlap": 0,
+      "action_family_overlap": {
+        "shared_family_count": 255,
+        "test_clips_in_shared_families": 431,
+        "test_clip_count": 500
+      },
+      "previously_evaluated": true
+    },
+    "omomo_quality500": {
+      "count": 500,
+      "source_pool_count": 5882,
+      "quality_conditioned": true,
+      "previously_evaluated": true,
+      "object_dynamics_simulated": false
+    }
+  },
+  "results": [
+    {
+      "population": "mixed500",
+      "checkpoint_global_step": 4000,
+      "arm": "A",
+      "primary": {
+        "success": 485,
+        "denominator": 500,
+        "completion_percent": 97.0
+      },
+      "secondary": {
+        "success": 485,
+        "denominator": 500
+      },
+      "joint_rmse_deg_clip_macro": 9.72541672131942,
+      "mpjpe_global_mm_clip_macro": 257.99000126640703,
+      "mpjpe_local_mm_clip_macro": 30.93709279075374,
+      "root_position_l2_cm_clip_macro": 25.58674202393269,
+      "root_orientation_deg_clip_macro": 5.176246572358348,
+      "metric_window": "observed prefix through primary first crossing, including failure row",
+      "joint_rmse_origin": "live scorer and independent recomputation"
+    },
+    {
+      "population": "mixed500",
+      "checkpoint_global_step": 4000,
+      "arm": "B",
+      "primary": {
+        "success": 483,
+        "denominator": 500,
+        "completion_percent": 96.6
+      },
+      "secondary": {
+        "success": 483,
+        "denominator": 500
+      },
+      "joint_rmse_deg_clip_macro": 9.589209250826595,
+      "mpjpe_global_mm_clip_macro": 277.0432212014401,
+      "mpjpe_local_mm_clip_macro": 34.457567214216894,
+      "root_position_l2_cm_clip_macro": 27.542389033861568,
+      "root_orientation_deg_clip_macro": 5.212973870226679,
+      "metric_window": "observed prefix through primary first crossing, including failure row",
+      "joint_rmse_origin": "live scorer and independent recomputation"
+    },
+    {
+      "population": "mixed500",
+      "checkpoint_global_step": 28000,
+      "arm": "A",
+      "primary": {
+        "success": 485,
+        "denominator": 500,
+        "completion_percent": 97.0
+      },
+      "secondary": {
+        "success": 486,
+        "denominator": 500
+      },
+      "joint_rmse_deg_clip_macro": 8.656705835155611,
+      "mpjpe_global_mm_clip_macro": 184.2279060043167,
+      "mpjpe_local_mm_clip_macro": 27.360492399307123,
+      "root_position_l2_cm_clip_macro": 18.1681836306384,
+      "root_orientation_deg_clip_macro": 4.454371985188241,
+      "metric_window": "observed prefix through primary first crossing, including failure row",
+      "joint_rmse_origin": "live scorer and independent recomputation"
+    },
+    {
+      "population": "mixed500",
+      "checkpoint_global_step": 28000,
+      "arm": "B",
+      "primary": {
+        "success": 485,
+        "denominator": 500,
+        "completion_percent": 97.0
+      },
+      "secondary": {
+        "success": 485,
+        "denominator": 500
+      },
+      "joint_rmse_deg_clip_macro": 8.292196033700176,
+      "mpjpe_global_mm_clip_macro": 205.68725558411757,
+      "mpjpe_local_mm_clip_macro": 26.430983648109518,
+      "root_position_l2_cm_clip_macro": 20.26215922845374,
+      "root_orientation_deg_clip_macro": 4.545211774834274,
+      "metric_window": "observed prefix through primary first crossing, including failure row",
+      "joint_rmse_origin": "live scorer and independent recomputation"
+    },
+    {
+      "population": "bones500",
+      "checkpoint_global_step": 4000,
+      "arm": "A",
+      "primary": {
+        "success": 498,
+        "denominator": 500,
+        "completion_percent": 99.6
+      },
+      "secondary": {
+        "success": 498,
+        "denominator": 500
+      },
+      "joint_rmse_deg_clip_macro": 7.579498364444346,
+      "mpjpe_global_mm_clip_macro": 201.17213452600478,
+      "mpjpe_local_mm_clip_macro": 25.97624239382952,
+      "root_position_l2_cm_clip_macro": 19.669886570681605,
+      "root_orientation_deg_clip_macro": 4.272101083330102,
+      "metric_window": "observed prefix through primary first crossing, including failure row",
+      "joint_rmse_origin": "independent trajectory recomputation"
+    },
+    {
+      "population": "bones500",
+      "checkpoint_global_step": 4000,
+      "arm": "B",
+      "primary": {
+        "success": 498,
+        "denominator": 500,
+        "completion_percent": 99.6
+      },
+      "secondary": {
+        "success": 498,
+        "denominator": 500
+      },
+      "joint_rmse_deg_clip_macro": 8.505442650503403,
+      "mpjpe_global_mm_clip_macro": 209.1877384252741,
+      "mpjpe_local_mm_clip_macro": 27.26481234355978,
+      "root_position_l2_cm_clip_macro": 20.346823316077746,
+      "root_orientation_deg_clip_macro": 4.162048502722267,
+      "metric_window": "observed prefix through primary first crossing, including failure row",
+      "joint_rmse_origin": "independent trajectory recomputation"
+    },
+    {
+      "population": "bones500",
+      "checkpoint_global_step": 10000,
+      "arm": "A",
+      "primary": {
+        "success": 498,
+        "denominator": 500,
+        "completion_percent": 99.6
+      },
+      "secondary": {
+        "success": 498,
+        "denominator": 500
+      },
+      "joint_rmse_deg_clip_macro": 6.426813974398325,
+      "mpjpe_global_mm_clip_macro": 138.1382931906553,
+      "mpjpe_local_mm_clip_macro": 23.51562780264331,
+      "root_position_l2_cm_clip_macro": 13.308609722567997,
+      "root_orientation_deg_clip_macro": 3.9182807970278364,
+      "metric_window": "observed prefix through primary first crossing, including failure row",
+      "joint_rmse_origin": "independent trajectory recomputation"
+    },
+    {
+      "population": "bones500",
+      "checkpoint_global_step": 10000,
+      "arm": "B",
+      "primary": {
+        "success": 498,
+        "denominator": 500,
+        "completion_percent": 99.6
+      },
+      "secondary": {
+        "success": 498,
+        "denominator": 500
+      },
+      "joint_rmse_deg_clip_macro": 5.931549879765665,
+      "mpjpe_global_mm_clip_macro": 139.61050548254175,
+      "mpjpe_local_mm_clip_macro": 23.12298246467926,
+      "root_position_l2_cm_clip_macro": 13.493035277856569,
+      "root_orientation_deg_clip_macro": 3.8140718250845285,
+      "metric_window": "observed prefix through primary first crossing, including failure row",
+      "joint_rmse_origin": "independent trajectory recomputation"
+    },
+    {
+      "population": "omomo_quality500",
+      "checkpoint_global_step": 28000,
+      "arm": "A",
+      "primary": {
+        "success": 498,
+        "denominator": 500,
+        "completion_percent": 99.6
+      },
+      "secondary": {
+        "success": 498,
+        "denominator": 500
+      },
+      "joint_rmse_deg_clip_macro": 8.49385994175316,
+      "mpjpe_global_mm_clip_macro": 163.13790755143896,
+      "mpjpe_local_mm_clip_macro": 26.151811822265152,
+      "root_position_l2_cm_clip_macro": 16.10422785261232,
+      "root_orientation_deg_clip_macro": 4.3247063848511385,
+      "metric_window": "observed prefix through primary first crossing, including failure row",
+      "joint_rmse_origin": "saved scorer and independent recomputation"
+    },
+    {
+      "population": "omomo_quality500",
+      "checkpoint_global_step": 28000,
+      "arm": "B",
+      "primary": {
+        "success": 499,
+        "denominator": 500,
+        "completion_percent": 99.8
+      },
+      "secondary": {
+        "success": 499,
+        "denominator": 500
+      },
+      "joint_rmse_deg_clip_macro": 8.20385889979711,
+      "mpjpe_global_mm_clip_macro": 176.72519829919057,
+      "mpjpe_local_mm_clip_macro": 24.555731839694243,
+      "root_position_l2_cm_clip_macro": 17.386935392215694,
+      "root_orientation_deg_clip_macro": 4.277046155366367,
+      "metric_window": "observed prefix through primary first crossing, including failure row",
+      "joint_rmse_origin": "saved scorer and independent recomputation"
+    },
+    {
+      "population": "bones500",
+      "checkpoint_global_step": 28000,
+      "arm": "A",
+      "primary": {
+        "success": 498,
+        "denominator": 500,
+        "completion_percent": 99.6
+      },
+      "secondary": {
+        "success": 498,
+        "denominator": 500
+      },
+      "joint_rmse_deg_clip_macro": 6.010777592899782,
+      "mpjpe_global_mm_clip_macro": 112.19543971672756,
+      "mpjpe_local_mm_clip_macro": 22.677876665728235,
+      "root_position_l2_cm_clip_macro": 10.71721900710556,
+      "root_orientation_deg_clip_macro": 3.8964180087569167,
+      "metric_window": "observed prefix through primary first crossing, including failure row",
+      "joint_rmse_origin": "trajectory recomputation for all 500 recorded rollouts"
+    },
+    {
+      "population": "bones500",
+      "checkpoint_global_step": 28000,
+      "arm": "B",
+      "primary": {
+        "success": 498,
+        "denominator": 500,
+        "completion_percent": 99.6
+      },
+      "secondary": {
+        "success": 499,
+        "denominator": 500
+      },
+      "joint_rmse_deg_clip_macro": 5.033141226893442,
+      "mpjpe_global_mm_clip_macro": 116.4438916763794,
+      "mpjpe_local_mm_clip_macro": 20.937255424151445,
+      "root_position_l2_cm_clip_macro": 11.161227982092358,
+      "root_orientation_deg_clip_macro": 3.542841384538037,
+      "metric_window": "observed prefix through primary first crossing, including failure row",
+      "joint_rmse_origin": "trajectory recomputation for all 500 recorded rollouts"
+    }
+  ],
+  "mixed4k_primary_strata": {
+    "A": {
+      "source": {
+        "LAFAN1": {
+          "success": 93,
+          "denominator": 106
+        },
+        "OMOMO": {
+          "success": 392,
+          "denominator": 394
+        }
+      },
+      "difficulty": {
+        "hard": {
+          "success": 186,
+          "denominator": 200
+        },
+        "moderate": {
+          "success": 149,
+          "denominator": 150
+        },
+        "basic": {
+          "success": 150,
+          "denominator": 150
+        }
+      },
+      "action_family": {
+        "crouch_bend_rise": {
+          "success": 7,
+          "denominator": 8
+        },
+        "upper_limb": {
+          "success": 99,
+          "denominator": 99
+        },
+        "compound_transitions": {
+          "success": 211,
+          "denominator": 221
+        },
+        "run_jump_land": {
+          "success": 9,
+          "denominator": 12
+        },
+        "walk_stop_turn": {
+          "success": 73,
+          "denominator": 74
+        },
+        "kick_single_support": {
+          "success": 86,
+          "denominator": 86
+        }
+      }
+    },
+    "B": {
+      "source": {
+        "LAFAN1": {
+          "success": 91,
+          "denominator": 106
+        },
+        "OMOMO": {
+          "success": 392,
+          "denominator": 394
+        }
+      },
+      "difficulty": {
+        "hard": {
+          "success": 184,
+          "denominator": 200
+        },
+        "moderate": {
+          "success": 149,
+          "denominator": 150
+        },
+        "basic": {
+          "success": 150,
+          "denominator": 150
+        }
+      },
+      "action_family": {
+        "crouch_bend_rise": {
+          "success": 8,
+          "denominator": 8
+        },
+        "upper_limb": {
+          "success": 99,
+          "denominator": 99
+        },
+        "compound_transitions": {
+          "success": 209,
+          "denominator": 221
+        },
+        "run_jump_land": {
+          "success": 9,
+          "denominator": 12
+        },
+        "walk_stop_turn": {
+          "success": 73,
+          "denominator": 74
+        },
+        "kick_single_support": {
+          "success": 85,
+          "denominator": 86
+        }
+      }
+    }
+  },
+  "limits": [
+    "Target-adaptation source recordings held out; original SONIC pretraining overlap unknown.",
+    "Not the undisclosed official Any2Any benchmark, robot or simulator.",
+    "Single seed and fixed reference start; source groups are not all independent.",
+    "Completion is not tracking accuracy, physical flight, object manipulation, robustness or real-robot proof.",
+    "Both populations were selected and previously evaluated; not first blind tests."
+  ]
+}

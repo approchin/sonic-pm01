@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "onnx_inputs": {
+    "actor_obs": {
+      "shape": [
+        1,
+        789
+      ],
+      "dtype": "float32",
+      "storage": "omega30 | relative_q240 | relative_qd240 | raw_action_history240 | gravity30 | current_feedback9",
+      "history": "Each of the first five terms contains ten chronological frames; q, qd and action history include all24 native joints.",
+      "feedback9": "current anchor-position error in actual LINK_BASE frame times5, actual root-link linear velocity3, reference-anchor linear velocity3; no appended history"
+    },
+    "tokenizer": {
+      "shape": [
+        1,
+        541
+      ],
+      "dtype": "float32",
+      "storage": "encoder_selector1 | q240 | qd240 | orientation60",
+      "reference540_storage": "all ten24-joint q frames | all ten24-joint qd frames | ten6D anchor orientations",
+      "encoder_input540": "cat(tokenizer[:,1:481].reshape(-1,10,48), tokenizer[:,481:541].reshape(-1,10,6), last_axis).flatten(1)",
+      "layout_note": "The command reshape(10,48) is a view of q and qd blocks; it is not a per-frame q24/qd24 concatenation.",
+      "orientation_origin": "Existing native motion_anchor_ori_b_mf observation via quat_to_tan_norm; preserve its original frame, basis and feature ordering.",
+      "reference_sampling": "ten reference samples spaced0.1 seconds apart",
+      "selector_width": 1,
+      "canonical_selector": 1,
+      "graph_uses_selector": false,
+      "selector_value": "ignored by fixed single branch",
+      "canonical_packing": "The public CLI validates the canonical selector1; the exported fixed-branch graph does not use its numeric value."
+    }
+  },
+  "output": {
+    "name": "mean23",
+    "shape": [
+      1,
+      23
+    ],
+    "dtype": "float32",
+    "meaning": "raw body action means in native body-joint order; no head output",
+    "body_joint_names": [
+      "J00_HIP_PITCH_L",
+      "J01_HIP_ROLL_L",
+      "J02_HIP_YAW_L",
+      "J03_KNEE_PITCH_L",
+      "J04_ANKLE_PITCH_L",
+      "J05_ANKLE_ROLL_L",
+      "J06_HIP_PITCH_R",
+      "J07_HIP_ROLL_R",
+      "J08_HIP_YAW_R",
+      "J09_KNEE_PITCH_R",
+      "J10_ANKLE_PITCH_R",
+      "J11_ANKLE_ROLL_R",
+      "J12_WAIST_YAW",
+      "J13_SHOULDER_PITCH_L",
+      "J14_SHOULDER_ROLL_L",
+      "J15_SHOULDER_YAW_L",
+      "J16_ELBOW_PITCH_L",
+      "J17_ELBOW_YAW_L",
+      "J18_SHOULDER_PITCH_R",
+      "J19_SHOULDER_ROLL_R",
+      "J20_SHOULDER_YAW_R",
+      "J21_ELBOW_PITCH_R",
+      "J22_ELBOW_YAW_R"
+    ]
+  },
+  "preprocessing": "Caller provides already packed native observations; this package does not read sensors or generate motion references.",
+  "inference": {
+    "provider": "CPUExecutionProvider",
+    "batch_size": 1,
+    "graph_optimization": "ORT_DISABLE_ALL"
+  },
+  "robot_control": "Not implemented. Raw means are not a complete hardware control command.",
+  "native_joint_names": [
+    "J00_HIP_PITCH_L",
+    "J01_HIP_ROLL_L",
+    "J02_HIP_YAW_L",
+    "J03_KNEE_PITCH_L",
+    "J04_ANKLE_PITCH_L",
+    "J05_ANKLE_ROLL_L",
+    "J06_HIP_PITCH_R",
+    "J07_HIP_ROLL_R",
+    "J08_HIP_YAW_R",
+    "J09_KNEE_PITCH_R",
+    "J10_ANKLE_PITCH_R",
+    "J11_ANKLE_ROLL_R",
+    "J12_WAIST_YAW",
+    "J13_SHOULDER_PITCH_L",
+    "J14_SHOULDER_ROLL_L",
+    "J15_SHOULDER_YAW_L",
+    "J16_ELBOW_PITCH_L",
+    "J17_ELBOW_YAW_L",
+    "J18_SHOULDER_PITCH_R",
+    "J19_SHOULDER_ROLL_R",
+    "J20_SHOULDER_YAW_R",
+    "J21_ELBOW_PITCH_R",
+    "J22_ELBOW_YAW_R",
+    "J23_HEAD_YAW"
+  ]
+}

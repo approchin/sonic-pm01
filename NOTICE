@@ -1,0 +1,13 @@
+SONIC-PM01 research release
+
+Independent adaptation of NVIDIA GEAR-SONIC to EngineAI PM01.
+SONIC source/model terms and FSQ/MIT notices are retained separately.
+See src/MODULE_PROVENANCE.json and src/pm01_sonic_inference/notices/.
+EngineAI robot visualization credits and BSD-3-Clause terms are retained in licenses/.
+
+Training data includes Motion Data by Bones Studio (https://bones.studio/).
+Use of the underlying dataset is subject to the BONES Motion Capture Dataset License Agreement.
+
+CMU motion capture data: https://mocap.cs.cmu.edu/
+The source database was created with funding from NSF EIA-0196217.
+EngineAI native SDK visualization model: preserve the separate 2025 Shenzhen Zhongqing Robot Technology Co., Ltd. (EngineAI) BSD-3-Clause notice.

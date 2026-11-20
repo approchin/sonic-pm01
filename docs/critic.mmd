@@ -1,0 +1,6 @@
+flowchart TB
+  O["Privileged simulation observations<br/>Reference, link poses, state/action histories: 1395"] --> M["Fixed PM01-to-source observation map<br/>1395 → 1645"]
+  M --> N["Running-statistic normalization"]
+  N --> C["Independent critic MLP<br/>1645 → 2048 → 2048 → 1024 → 1024 → 512 → 512 → 1<br/>A and B trained"]
+  C --> V["Scalar V: expected discounted return"]
+  V --> P["Training-time advantage and value-loss computation"]

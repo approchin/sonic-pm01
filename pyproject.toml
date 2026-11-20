@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sonic-pm01-inference"
+version = "0.1.0"
+description = "CPU Actor inference from packed SONIC-PM01 observations to raw body action means"
+requires-python = ">=3.10"
+dependencies = ["numpy==1.26.4", "onnxruntime==1.23.2"]
+
+[project.optional-dependencies]
+torch = ["torch>=2.7,<3", "safetensors==0.8.0"]
+
+[project.scripts]
+pm01-infer-cpu = "pm01_sonic_inference.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+pm01_sonic_inference = ["notices/*.txt"]

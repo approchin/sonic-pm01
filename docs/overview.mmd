@@ -1,0 +1,18 @@
+flowchart TB
+  subgraph TRAIN["PPO adaptation in simulation"]
+    X["Reference motion and simulation observations"] --> A["Actor: action distribution"]
+    X --> C["Independent critic: value estimate"]
+    A -->|"Body actions"| E["PM01 physics and PD control"]
+    E -->|"Next observations"| X
+    E -->|"Rollouts, rewards, termination"| P["GAE and PPO losses"]
+    C -->|"Value V"| P
+    P -.-> A
+    P -.-> C
+  end
+  subgraph INFER["Deterministic execution"]
+    I["Packed reference and estimated robot state"] --> AP["Exported actor: mean23"]
+    AP --> PD["Action scaling and body PD"]
+    H["Current head reference"] --> HP["Head reference PD"]
+    PD --> R["PM01"]
+    HP --> R
+  end

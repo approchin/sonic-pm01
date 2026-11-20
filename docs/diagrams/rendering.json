@@ -1,0 +1,33 @@
+{
+  "editable_source_format": "Mermaid flowchart",
+  "static_renderer": "local Graphviz preserving parsed node/edge inventory",
+  "diagrams": [
+    {
+      "name": "overview",
+      "source": "overview.mmd",
+      "static_svg": "diagrams/overview.svg",
+      "source_sha256": "11e4ab0565b7ad4353f538257b5e2e249a59b697867f5b33ea94c093ae470b76",
+      "svg_sha256": "0de45a1d1663c2aa4aeec685e423ae5e573a8e42614a48cbe4bbe506123a1041",
+      "node_count": 11,
+      "edge_count": 13
+    },
+    {
+      "name": "actor",
+      "source": "actor.mmd",
+      "static_svg": "diagrams/actor.svg",
+      "source_sha256": "ad11fd9538e0d43c88ddf4fd31d58ef100229e66a6b46a5cde233120913b97da",
+      "svg_sha256": "ee1dfdfdca3a5cc680ffad9148d554b92de349fdf471b4a3fa41218f2bd92488",
+      "node_count": 10,
+      "edge_count": 9
+    },
+    {
+      "name": "critic",
+      "source": "critic.mmd",
+      "static_svg": "diagrams/critic.svg",
+      "source_sha256": "58d026c787ac5cfeef2d17763833e912fbef6ba9c71b638c3257ce124a50b254",
+      "svg_sha256": "a1d4aff3d8db967013c7dd3c2fcbbbdaff9e7985d3ae1cd7f12047e3e8fddb7e",
+      "node_count": 6,
+      "edge_count": 5
+    }
+  ]
+}

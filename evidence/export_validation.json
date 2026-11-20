@@ -1,0 +1,343 @@
+{
+  "type": "numerical_export_validation_not_physical_tracking",
+  "samples_per_model": 695,
+  "historical_simulation_observation_rows": 439,
+  "synthetic_rows": 256,
+  "batch_size": 1,
+  "scope": "Original PyTorch actor versus tensor-only reload and ONNX CPU; no training or robot connection.",
+  "observation_data_released": false,
+  "models": [
+    {
+      "model_id": "a_step_004000",
+      "arm": "a",
+      "global_ppo_update": 4000,
+      "samples": 695,
+      "tolerance": {
+        "atol": 1e-05,
+        "rtol": 0.0001,
+        "formula": "abs(actual-reference) <= 1e-5 + 1e-4*abs(reference)"
+      },
+      "pytorch_safetensors_vs_original": {
+        "encoder_input540": {
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "rmse": 0.0,
+          "different_components": 0,
+          "failed_tolerance_components": 0,
+          "all_finite": true,
+          "pass": true
+        },
+        "pre_fsq64": {
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "rmse": 0.0,
+          "different_components": 0,
+          "failed_tolerance_components": 0,
+          "all_finite": true,
+          "pass": true
+        },
+        "fsq64": {
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "rmse": 0.0,
+          "different_components": 0,
+          "failed_tolerance_components": 0,
+          "all_finite": true,
+          "pass": true
+        },
+        "mean23": {
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "rmse": 0.0,
+          "different_components": 0,
+          "failed_tolerance_components": 0,
+          "all_finite": true,
+          "pass": true
+        }
+      },
+      "onnx_production_vs_original": {
+        "max_abs": 1.1444091796875e-05,
+        "mean_abs": 3.401533774649579e-07,
+        "rmse": 5.155844608404823e-07,
+        "different_components": 14740,
+        "failed_tolerance_components": 0,
+        "all_finite": true,
+        "pass": true
+      },
+      "encoder_and_fsq_exact": {
+        "encoder_input540": true,
+        "fsq64": true
+      },
+      "onnx_runtime": {
+        "version": "1.23.2",
+        "package_build": "onnxruntime-gpu, existing local installation",
+        "active_providers": [
+          "CPUExecutionProvider"
+        ],
+        "graph_optimization": "ORT_DISABLE_ALL",
+        "intra_op_threads": 1,
+        "inter_op_threads": 1
+      },
+      "artifacts": {
+        "actor_mean23.safetensors": {
+          "bytes": 55677484,
+          "sha256": "5231404f9fe1d301ac5936639e56b2ea82ac59818598403e9229226122b78872"
+        },
+        "actor_mean23.onnx": {
+          "bytes": 55684225,
+          "sha256": "72cadcefdc0b2fe8414d7b8b40936509b972719b788c45a99242447ff7161a02"
+        }
+      },
+      "pass": true
+    },
+    {
+      "model_id": "b_step_004000",
+      "arm": "b",
+      "global_ppo_update": 4000,
+      "samples": 695,
+      "tolerance": {
+        "atol": 1e-05,
+        "rtol": 0.0001,
+        "formula": "abs(actual-reference) <= 1e-5 + 1e-4*abs(reference)"
+      },
+      "pytorch_safetensors_vs_original": {
+        "encoder_input540": {
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "rmse": 0.0,
+          "different_components": 0,
+          "failed_tolerance_components": 0,
+          "all_finite": true,
+          "pass": true
+        },
+        "pre_fsq64": {
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "rmse": 0.0,
+          "different_components": 0,
+          "failed_tolerance_components": 0,
+          "all_finite": true,
+          "pass": true
+        },
+        "fsq64": {
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "rmse": 0.0,
+          "different_components": 0,
+          "failed_tolerance_components": 0,
+          "all_finite": true,
+          "pass": true
+        },
+        "mean23": {
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "rmse": 0.0,
+          "different_components": 0,
+          "failed_tolerance_components": 0,
+          "all_finite": true,
+          "pass": true
+        }
+      },
+      "onnx_production_vs_original": {
+        "max_abs": 1.049041748046875e-05,
+        "mean_abs": 3.7220422655082075e-07,
+        "rmse": 5.985759691566029e-07,
+        "different_components": 14829,
+        "failed_tolerance_components": 0,
+        "all_finite": true,
+        "pass": true
+      },
+      "encoder_and_fsq_exact": {
+        "encoder_input540": true,
+        "fsq64": true
+      },
+      "onnx_runtime": {
+        "version": "1.23.2",
+        "package_build": "onnxruntime-gpu, existing local installation",
+        "active_providers": [
+          "CPUExecutionProvider"
+        ],
+        "graph_optimization": "ORT_DISABLE_ALL",
+        "intra_op_threads": 1,
+        "inter_op_threads": 1
+      },
+      "artifacts": {
+        "actor_mean23.safetensors": {
+          "bytes": 55677484,
+          "sha256": "97cdc6bcee7e0fe105da794b930ee87c9a02b800db2b58b92a3306c386dc7ccd"
+        },
+        "actor_mean23.onnx": {
+          "bytes": 55684225,
+          "sha256": "67fc2ca200d7f81d81010d584512c3756829e4ad5ae9b6b61297ceb361088408"
+        }
+      },
+      "pass": true
+    },
+    {
+      "model_id": "a_step_028000",
+      "arm": "a",
+      "global_ppo_update": 28000,
+      "samples": 695,
+      "tolerance": {
+        "atol": 1e-05,
+        "rtol": 0.0001,
+        "formula": "abs(actual-reference) <= 1e-5 + 1e-4*abs(reference)"
+      },
+      "pytorch_safetensors_vs_original": {
+        "encoder_input540": {
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "rmse": 0.0,
+          "different_components": 0,
+          "failed_tolerance_components": 0,
+          "all_finite": true,
+          "pass": true
+        },
+        "pre_fsq64": {
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "rmse": 0.0,
+          "different_components": 0,
+          "failed_tolerance_components": 0,
+          "all_finite": true,
+          "pass": true
+        },
+        "fsq64": {
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "rmse": 0.0,
+          "different_components": 0,
+          "failed_tolerance_components": 0,
+          "all_finite": true,
+          "pass": true
+        },
+        "mean23": {
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "rmse": 0.0,
+          "different_components": 0,
+          "failed_tolerance_components": 0,
+          "all_finite": true,
+          "pass": true
+        }
+      },
+      "onnx_production_vs_original": {
+        "max_abs": 1.52587890625e-05,
+        "mean_abs": 3.137063799840689e-07,
+        "rmse": 4.909563454030268e-07,
+        "different_components": 14635,
+        "failed_tolerance_components": 0,
+        "all_finite": true,
+        "pass": true
+      },
+      "encoder_and_fsq_exact": {
+        "encoder_input540": true,
+        "fsq64": true
+      },
+      "onnx_runtime": {
+        "version": "1.23.2",
+        "package_build": "onnxruntime-gpu, existing local installation",
+        "active_providers": [
+          "CPUExecutionProvider"
+        ],
+        "graph_optimization": "ORT_DISABLE_ALL",
+        "intra_op_threads": 1,
+        "inter_op_threads": 1
+      },
+      "artifacts": {
+        "actor_mean23.safetensors": {
+          "bytes": 55677484,
+          "sha256": "f754be346f05b264ccf04ac545e518d67777c8863d1587295a010f2421d7077a"
+        },
+        "actor_mean23.onnx": {
+          "bytes": 55684226,
+          "sha256": "7d09968f6c2d51f4f0df44a8d0ab6a8c91ee41aed51a08083e8815b97ae6c5f5"
+        }
+      },
+      "pass": true
+    },
+    {
+      "model_id": "b_step_028000",
+      "arm": "b",
+      "global_ppo_update": 28000,
+      "samples": 695,
+      "tolerance": {
+        "atol": 1e-05,
+        "rtol": 0.0001,
+        "formula": "abs(actual-reference) <= 1e-5 + 1e-4*abs(reference)"
+      },
+      "pytorch_safetensors_vs_original": {
+        "encoder_input540": {
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "rmse": 0.0,
+          "different_components": 0,
+          "failed_tolerance_components": 0,
+          "all_finite": true,
+          "pass": true
+        },
+        "pre_fsq64": {
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "rmse": 0.0,
+          "different_components": 0,
+          "failed_tolerance_components": 0,
+          "all_finite": true,
+          "pass": true
+        },
+        "fsq64": {
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "rmse": 0.0,
+          "different_components": 0,
+          "failed_tolerance_components": 0,
+          "all_finite": true,
+          "pass": true
+        },
+        "mean23": {
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "rmse": 0.0,
+          "different_components": 0,
+          "failed_tolerance_components": 0,
+          "all_finite": true,
+          "pass": true
+        }
+      },
+      "onnx_production_vs_original": {
+        "max_abs": 8.58306884765625e-06,
+        "mean_abs": 3.143919400372397e-07,
+        "rmse": 4.763970293740161e-07,
+        "different_components": 14682,
+        "failed_tolerance_components": 0,
+        "all_finite": true,
+        "pass": true
+      },
+      "encoder_and_fsq_exact": {
+        "encoder_input540": true,
+        "fsq64": true
+      },
+      "onnx_runtime": {
+        "version": "1.23.2",
+        "package_build": "onnxruntime-gpu, existing local installation",
+        "active_providers": [
+          "CPUExecutionProvider"
+        ],
+        "graph_optimization": "ORT_DISABLE_ALL",
+        "intra_op_threads": 1,
+        "inter_op_threads": 1
+      },
+      "artifacts": {
+        "actor_mean23.safetensors": {
+          "bytes": 55677484,
+          "sha256": "07075964b47f56136895d15ec9a1fa0d53452ae973a157deb55ca244eb3a4815"
+        },
+        "actor_mean23.onnx": {
+          "bytes": 55684226,
+          "sha256": "e1576b4e1d63b1a21fcbad6749f8f867d91b5b9ee978d92a001228356c7493eb"
+        }
+      },
+      "pass": true
+    }
+  ]
+}

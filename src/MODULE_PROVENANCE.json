@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "snapshot_policy": "Source snapshots with SHA256; no invented historical commits.",
+  "modules": [
+    {
+      "file": "pm01_sonic_inference/actor.py",
+      "origin": "PM01_Orin pure-inference validation, 2026-10-24: src/standalone_actor.py",
+      "source_sha256": "8dcc14a58b768b1de8d460f22867dbdb071f32fbab2d5fa3021f77767d646918",
+      "preserved_components": [
+        "_mlp",
+        "NativeFSQ",
+        "StandaloneActor.encoder_input",
+        "StandaloneActor.forward_debug",
+        "StandaloneActor.forward"
+      ],
+      "changes": [
+        "CPU safetensors-only loader",
+        "remove robot postprocessing and NPZ deployment helpers",
+        "retain third-party attribution"
+      ],
+      "runtime_dependencies": [
+        "torch",
+        "safetensors"
+      ]
+    },
+    {
+      "component": "NativeFSQ",
+      "upstream": "https://github.com/lucidrains/vector-quantize-pytorch",
+      "version": "1.31.6",
+      "source": "vector_quantize_pytorch/finite_scalar_quantization.py",
+      "license": "MIT",
+      "notice": "pm01_sonic_inference/notices/vector-quantize-pytorch-LICENSE.txt",
+      "scope": "Active finite scalar quantization arithmetic adapted by the earlier standalone reconstruction."
+    },
+    {
+      "component": "SONIC architecture and pretrained-weight lineage",
+      "upstream": "https://github.com/NVlabs/GR00T-WholeBodyControl",
+      "commit": "087f9ac01d46f6d8e4d0b73c01ae64799f292a38",
+      "notice": "pm01_sonic_inference/notices/SONIC-LICENSE.txt",
+      "scope": "Encoder/FSQ/dynamic-decoder architecture and adapted weights. The public inference package contains no gear_sonic imports or vendored Any2Any fork."
+    },
+    {
+      "files": [
+        "pm01_sonic_inference/__init__.py",
+        "pm01_sonic_inference/runtime.py",
+        "pm01_sonic_inference/cli.py",
+        "scripts/infer_cpu.py"
+      ],
+      "origin": "New CPU inference packaging for this release preparation.",
+      "scope": "Array validation, explicit CPUExecutionProvider and a raw 23-dimensional action-mean interface."
+    }
+  ]
+}
